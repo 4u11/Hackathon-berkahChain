@@ -37,11 +37,10 @@ const Home: FC = () => {
 
       {/* About Section */}
       <section className="p-6">
-        <h2 className="text-xl font-bold">About us</h2>
         <p className="text-gray-600 mt-2">
-          Lorem ipsum bevis trel röpätt. Megar påligt ponde: käsamma bionade. Tragisk skuldkvotstak i posam spengar.
+        BerkahChain is a crowdfunding platform for those who are in need of funding. BerkahChain provide an opportunity for fund owners in crypto digital wallets to contribute to a cause. The platform is open to people in need (medically, natural disasters, project funding, etc). Donate to those in need below or propose your funding needs in the Donations page.
         </p>
-        <button className="mt-4 bg-green-500 px-4 py-2 rounded text-white">View All</button>
+        <button className="mt-4 bg-green-500 px-4 py-2 rounded text-white">V</button>
       </section>
 
       {/* Grid Section */}
