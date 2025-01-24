@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 'use client'
 
 import { FC, useState } from "react";
@@ -26,25 +25,6 @@ const Home: FC = () => {
         </div>
         <div className="rounded-full overflow-hidden w-10 h-10">
           <button className="signup-btn bg-green-500 px-4 py-2 rounded text-white">Sign Up</button>
-=======
-import { FC } from "react";
-import Image from "next/image";
-
-const Home: FC = () => {
-  return (
-    <div>
-      {/* Navbar */}
-      <nav className="flex justify-between p-4 bg-white shadow-md">
-        <div className="flex space-x-4">
-          <a href="#" className="font-semibold">Home</a>
-          <a href="#" className="font-semibold">Donation</a>
-          <a href="#" className="font-semibold">About Us</a>
-          <a href="#" className="font-semibold">Market</a>
-        </div>
-        <div className="rounded-full overflow-hidden w-10 h-10">
-         <button className="signup-btn">Sign Up</button>
-
->>>>>>> 77aefde8d4d6a8f687f4e0d0de7600c6b2a3f04f
         </div>
       </nav>
 
@@ -66,7 +46,6 @@ const Home: FC = () => {
       </div>
 
       {/* About Section */}
-<<<<<<< HEAD
       <section id="about-us" className="p-6">
         <p className="text-gray-600 mt-2">
           BerkahChain is a crowdfunding platform for those who are in need of funding. BerkahChain provides an opportunity for fund owners in crypto digital wallets to contribute to a cause. The platform is open to people in need (medically, natural disasters, project funding, etc). Donate to those in need below or propose your funding needs in the Donations page.
@@ -82,13 +61,6 @@ const Home: FC = () => {
             <p className="text-gray-700">More information about BerkahChain and how it helps people in need through crowdfunding.</p>
           </div>
         )}
-=======
-      <section className="p-6">
-        <p className="text-gray-600 mt-2">
-        BerkahChain is a crowdfunding platform for those who are in need of funding. BerkahChain provide an opportunity for fund owners in crypto digital wallets to contribute to a cause. The platform is open to people in need (medically, natural disasters, project funding, etc). Donate to those in need below or propose your funding needs in the Donations page.
-        </p>
-        <button className="mt-4 bg-green-500 px-4 py-2 rounded text-white">V</button>
->>>>>>> 77aefde8d4d6a8f687f4e0d0de7600c6b2a3f04f
       </section>
 
       {/* Grid Section */}
@@ -102,8 +74,4 @@ const Home: FC = () => {
   );
 };
 
-<<<<<<< HEAD
 export default Home;
-=======
-export default Home;
->>>>>>> 77aefde8d4d6a8f687f4e0d0de7600c6b2a3f04f
