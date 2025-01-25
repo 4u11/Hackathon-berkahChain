@@ -1,5 +1,6 @@
 'use client'
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -9,7 +10,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <div>
       <nav className={`navbar ${isDonationPage ? 'donation' : ''}`}>
         <ul>
-          <li><a href="/">Home</a></li>
+          <li><Link href="/">Home</Link></li>
         </ul>
         <ul>
           <li><a href="/donations">Donation</a></li>
