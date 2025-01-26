@@ -5,19 +5,17 @@ const DonationPage = () => {
   return (
     <div className="bg-white min-h-screen">
       {/* Navbar */}
-      <nav className="flex justify-between items-center p-4 border-b border-blue-500">
-        <div className="flex space-x-6">
-          <a href="/home" className="font-bold">Home</a> {/* Changed from <link> to <a> */}
-          <a href="/donation" className="font-bold">Donation</a>
-          <a href="/about" className="font-bold">About Us</a>
-          <a href="/market" className="font-bold">Market</a>
+      <nav className="flex justify-between p-4 bg-black shadow-md">
+        <div className="flex space-x-4">
+          <a href="/home" className="font-semibold">Home</a>
+          <a href="/donations" className="font-semibold text-white">Donation</a>
+          <a href="#" className="font-semibold">About Us</a>
+          <a href="#" className="font-semibold">Market</a>
         </div>
-        <div className="flex items-center space-x-2">
-          <img src="/profile.jpg" alt="Profile" className="w-8 h-8 rounded-full" />
-          <button className="text-sm">▼</button>
+        <div className="rounded-full overflow-hidden w-10 h-10">
+          <button className="signup-btn bg-green-500 px-4 py-2 rounded text-white">Sign Up</button>
         </div>
       </nav>
-      
       {/* Donation Grid */}
       <div className="grid grid-cols-3 gap-6 p-10">
         {[...Array(6)].map((_, index) => (
