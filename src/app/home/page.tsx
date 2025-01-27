@@ -22,7 +22,7 @@ const Home: FC = () => {
           <a href="/donations" className="font-semibold text-white">Donation</a>
 
           <a href="#" className="font-semibold" onClick={() => scrollToSection('about-us')}>About Us</a>
-          <a href="#" className="font-semibold">Market</a>
+          <a href="/market" className="font-semibold">Market</a>
         </div>
         <div className="rounded-full overflow-hidden w-10 h-10">
           <button className="signup-btn bg-green-500 px-4 py-2 rounded text-white">Sign Up</button>
