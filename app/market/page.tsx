@@ -2,14 +2,34 @@
 
 import React, { useEffect, useState } from 'react';
 
+interface Prices {
+  bitcoin: { usd: number };
+  ethereum: { usd: number };
+  dogecoin: { usd: number };
+}
+
 const Market = () => {
-  const [prices, setPrices] = useState<any>({});
+  const [prices, setPrices] = useState<Prices | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,dogecoin&vs_currencies=usd')
-      .then(response => response.json())
-      .then(data => setPrices(data))
-      .catch(error => console.error('Error fetching prices:', error));
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setPrices(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching prices:', error);
+        setError('Failed to fetch prices. Please try again later.');
+        setLoading(false);
+      });
   }, []);
 
   return (
@@ -28,18 +48,20 @@ const Market = () => {
       </nav>
       <section style={{ textAlign: 'center', padding: '20px' }}>
         <h2>Cryptocurrency Market Prices</h2>
+        {loading && <p>Loading...</p>}
+        {error && <p className="text-red-500">{error}</p>}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '20px' }}>
           <div style={{ backgroundColor: 'gray', padding: '10px', borderRadius: '10px' }}>
             <h3>Bitcoin</h3>
-            <p>${prices.bitcoin?.usd ?? 'Loading...'}</p>
+            <p>${prices?.bitcoin?.usd ?? 'N/A'}</p>
           </div>
           <div style={{ backgroundColor: 'gray', padding: '10px', borderRadius: '10px' }}>
             <h3>Ethereum</h3>
-            <p>${prices.ethereum?.usd ?? 'Loading...'}</p>
+            <p>${prices?.ethereum?.usd ?? 'N/A'}</p>
           </div>
           <div style={{ backgroundColor: 'gray', padding: '10px', borderRadius: '10px' }}>
             <h3>Dogecoin</h3>
-            <p>${prices.dogecoin?.usd ?? 'Loading...'}</p>
+            <p>${prices?.dogecoin?.usd ?? 'N/A'}</p>
           </div>
         </div>
       </section>
