@@ -50,16 +50,19 @@ const Market = () => {
         <h2>Cryptocurrency Market Prices</h2>
         {loading && <p>Loading...</p>}
         {error && <p className="text-red-500">{error}</p>}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '20px' }}>
-          <div style={{ backgroundColor: 'gray', padding: '10px', borderRadius: '10px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '20px', flexWrap: 'wrap' }}>
+          <div style={{ backgroundColor: 'gray', padding: '20px', borderRadius: '10px', textAlign: 'center', minWidth: '150px' }}>
+            <img src="/bitcoin.png" alt="Bitcoin" style={{ width: '50px', height: '50px', marginBottom: '10px' }} />
             <h3>Bitcoin</h3>
             <p>${prices?.bitcoin?.usd ?? 'N/A'}</p>
           </div>
-          <div style={{ backgroundColor: 'gray', padding: '10px', borderRadius: '10px' }}>
+          <div style={{ backgroundColor: 'gray', padding: '20px', borderRadius: '10px', textAlign: 'center', minWidth: '150px' }}>
+            <img src="/ethereum.png" alt="Ethereum" style={{ width: '50px', height: '50px', marginBottom: '10px' }} />
             <h3>Ethereum</h3>
             <p>${prices?.ethereum?.usd ?? 'N/A'}</p>
           </div>
-          <div style={{ backgroundColor: 'gray', padding: '10px', borderRadius: '10px' }}>
+          <div style={{ backgroundColor: 'gray', padding: '20px', borderRadius: '10px', textAlign: 'center', minWidth: '150px' }}>
+            <img src="/dogecoin.png" alt="Dogecoin" style={{ width: '50px', height: '50px', marginBottom: '10px' }} />
             <h3>Dogecoin</h3>
             <p>${prices?.dogecoin?.usd ?? 'N/A'}</p>
           </div>
