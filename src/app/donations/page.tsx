@@ -5,17 +5,25 @@ const DonationPage = () => {
   return (
     <div className="bg-white min-h-screen">
       {/* Navbar */}
-      <nav className="flex justify-between p-4 bg-black shadow-md">
-        <div className="flex space-x-4">
-          <a href="/home" className="font-semibold">Home</a>
-          <a href="/donations" className="font-semibold text-white">Donation</a>
-          <a href="#" className="font-semibold">About Us</a>
-          <a href="/market" className="font-semibold">Market</a>
-        </div>
-        <div className="rounded-full overflow-hidden w-10 h-10">
-          <button className="signup-btn bg-green-500 px-4 py-2 rounded text-white">Sign Up</button>
+      <nav className="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-700">
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center space-x-8">
+            <a href="/home" className="text-xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+              BerkahChain
+            </a>
+            <div className="hidden md:flex space-x-6">
+              <a href="/home" className="text-gray-300 hover:text-white transition-colors">Home</a>
+              <a href="/donations" className="text-gray-300 hover:text-white transition-colors">Donation</a>
+              <a href="#about-us" className="text-gray-300 hover:text-white transition-colors">About</a>
+              <a href="/market" className="text-gray-300 hover:text-white transition-colors">Market</a>
+            </div>
+          </div>
+          <button className="bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-2 rounded-full text-white hover:shadow-lg transition-all">
+            Sign Up
+          </button>
         </div>
       </nav>
+
       {/* Donation Grid */}
       <div className="grid grid-cols-3 gap-6 p-10">
         {[...Array(6)].map((_, index) => (
