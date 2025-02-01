@@ -222,9 +222,9 @@ const Home = () => {
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             Empower communities through decentralized crowdfunding and transparent donations
           </p>
-          <button className="bg-green-500 hover:bg-green-600 px-8 py-3 rounded-full text-white font-semibold transition-all transform hover:scale-105">
+          <a href="/donations" className="bg-green-500 hover:bg-green-600 px-8 py-3 rounded-full text-white font-semibold transition-all transform hover:scale-105">
             Start Funding Now
-          </button>
+          </a>
         </div>
       </section>
 
