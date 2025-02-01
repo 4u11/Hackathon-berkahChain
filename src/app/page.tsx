@@ -1,20 +1,73 @@
-// page.tsx
 'use client'
-
-import { FC, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
-const Home: FC = () => {
+const Home = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSignInOpen, setIsSignInOpen] = useState(false);
+  const [isAboutVisible, setIsAboutVisible] = useState(false);
 
+  // Custom smooth scroll function with easing
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: 'smooth' });
+    if (element) {
+      const offset = 80; // Adjust for sticky navbar height
+      const startPosition = window.scrollY;
+      const targetPosition = element.getBoundingClientRect().top + startPosition - offset;
+      const duration = 1000; // Scroll duration in milliseconds
+      let startTime: number | null = null;
+
+      const easeInOutQuad = (t: number) => {
+        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      };
+
+      const animateScroll = (timestamp: number) => {
+        if (!startTime) startTime = timestamp;
+        const progress = timestamp - startTime;
+        const progressRatio = Math.min(progress / duration, 1);
+        const easedProgress = easeInOutQuad(progressRatio);
+
+        window.scrollTo(0, startPosition + (targetPosition - startPosition) * easedProgress);
+
+        if (progress < duration) {
+          requestAnimationFrame(animateScroll);
+        } else {
+          setIsAboutVisible(true); // Trigger fade-in animation
+        }
+      };
+
+      requestAnimationFrame(animateScroll);
+    }
   };
+
+  // Add intersection observer for fade-in effect
+  useEffect(() => {
+    const aboutSection = document.getElementById('about-us');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsAboutVisible(true);
+          }
+        });
+      },
+      { threshold: 0.1 } // Trigger when 10% of the section is visible
+    );
+
+    if (aboutSection) {
+      observer.observe(aboutSection);
+    }
+
+    return () => {
+      if (aboutSection) {
+        observer.unobserve(aboutSection);
+      }
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
-      {/* Modern Navbar */}
+      {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-700">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center space-x-8">
@@ -22,17 +75,78 @@ const Home: FC = () => {
               BerkahChain
             </a>
             <div className="hidden md:flex space-x-6">
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">Home</a>
+              <a href="/home" className="text-gray-300 hover:text-white transition-colors">Home</a>
               <a href="/donations" className="text-gray-300 hover:text-white transition-colors">Donation</a>
-              <a href="#about-us" className="text-gray-300 hover:text-white transition-colors" onClick={() => scrollToSection('about-us')}>About</a>
+              <a 
+                href="#about-us" 
+                className="text-gray-300 hover:text-white transition-colors"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent default anchor behavior
+                  scrollToSection('about-us');
+                }}
+              >
+                About
+              </a>
               <a href="/market" className="text-gray-300 hover:text-white transition-colors">Market</a>
             </div>
           </div>
-          <button className="bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-2 rounded-full text-white hover:shadow-lg transition-all">
-            Sign Up
+          <button 
+            onClick={() => setIsSignInOpen(true)}
+            className="bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-2 rounded-full text-white hover:shadow-lg transition-all"
+          >
+            Sign In
           </button>
         </div>
       </nav>
+
+      {/* Sign-In Pop-Up */}
+      {isSignInOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-gray-800/90 p-8 rounded-2xl border border-gray-700 w-full max-w-md">
+            <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+              Sign In
+            </h2>
+            <form className="space-y-6">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  className="mt-1 w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                  placeholder="Enter your email"
+                />
+              </div>
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  className="mt-1 w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                  placeholder="Enter your password"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-2 rounded-full text-white hover:shadow-lg transition-all"
+              >
+                Sign In
+              </button>
+            </form>
+            <button
+              onClick={() => setIsSignInOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-200 transition-colors"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Hero Section */}
       <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
@@ -59,34 +173,28 @@ const Home: FC = () => {
         </div>
       </section>
 
-      {/* Wallet Connect */}
-      <div className="container mx-auto px-4 py-8 text-center">
-        <button className="inline-flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-full transition-all">
-          <Image src="/wallet-icon.png" alt="Wallet" width={24} height={24} className="filter invert" />
-          <span className="text-gray-100 font-medium">Connect Wallet</span>
-        </button>
-      </div>
-
-      {/* About Section */}
-      <section id="about-us" className="container mx-auto px-4 py-16">
+      {/* About Section with Dropdown */}
+      <section 
+        id="about-us" 
+        className={`container mx-auto px-4 py-16 transition-opacity duration-500 ${isAboutVisible ? 'opacity-100' : 'opacity-0'}`}
+      >
         <div className="max-w-3xl mx-auto bg-gray-800/50 p-8 rounded-2xl border border-gray-700">
-          <h2 className="text-3xl font-bold mb-6 text-gray-100">About BerkahChain</h2>
+          <div className="flex justify-between items-center">
+            <h2 className="text-3xl font-bold mb-6 text-gray-100">About BerkahChain</h2>
+            <button 
+              className="bg-green-500 px-4 py-2 rounded text-white hover:bg-green-600 transition-colors"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              {isDropdownOpen ? '▲' : '▼'}
+            </button>
+          </div>
           <p className="text-gray-400 leading-relaxed mb-6">
-            Were revolutionizing crowdfunding through blockchain technology, creating a transparent platform that connects donors directly with those in need. Whether its medical emergencies, disaster relief, or community projects, we ensure every contribution makes a real impact.
+            Were revolutionizing crowdfunding through blockchain technology, creating a transparent platform that connects donors directly with those in need.
           </p>
-          <button 
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="flex items-center space-x-2 text-green-500 hover:text-green-400 transition-colors"
-          >
-            <span>Learn More</span>
-            <svg className={`w-4 h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
           {isDropdownOpen && (
             <div className="mt-4 p-4 bg-gray-700/30 rounded-lg animate-fade-in">
               <p className="text-gray-300">
-                Our platform uses smart contracts to ensure complete transparency. Every transaction is recorded on the blockchain, providing donors with real-time tracking of their contributions.
+                Whether its medical emergencies, disaster relief, or community projects, we ensure every contribution makes a real impact. Our platform uses smart contracts to guarantee transparency and accountability in every transaction.
               </p>
             </div>
           )}

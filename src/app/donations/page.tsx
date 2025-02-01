@@ -13,6 +13,7 @@ interface DonationCause {
 const DonationPage = () => {
   const [btcPrice, setBtcPrice] = useState<number>(0);
   const [loading, setLoading] = useState(true);
+  const [isSignInOpen, setIsSignInOpen] = useState<boolean>(false);
 
   const donationCauses: DonationCause[] = [
     { id: 1, title: "Children's Medical Fund", raisedBTC: 0.8, goalBTC: 2.5, category: "Healthcare" },
@@ -24,7 +25,6 @@ const DonationPage = () => {
   ];
 
   useEffect(() => {
-    // Fetch current Bitcoin price
     fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
       .then(res => res.json())
       .then(data => {
@@ -52,11 +52,63 @@ const DonationPage = () => {
               <a href="/market" className="text-gray-300 hover:text-white transition-colors">Market</a>
             </div>
           </div>
-          <button className="bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-2 rounded-full text-white hover:shadow-lg transition-all">
-            Connect Wallet
+          <button 
+            onClick={() => setIsSignInOpen(true)}
+            className="bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-2 rounded-full text-white hover:shadow-lg transition-all"
+          >
+            Sign In
           </button>
         </div>
       </nav>
+
+      {/* Sign-In Pop-Up */}
+      {isSignInOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-gray-800/90 p-8 rounded-2xl border border-gray-700 w-full max-w-md">
+            <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+              Sign In
+            </h2>
+            <form className="space-y-6">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  className="mt-1 w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                  placeholder="Enter your email"
+                />
+              </div>
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  className="mt-1 w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                  placeholder="Enter your password"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-2 rounded-full text-white hover:shadow-lg transition-all"
+              >
+                Sign In
+              </button>
+            </form>
+            <button
+              onClick={() => setIsSignInOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-200 transition-colors"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Donation Grid */}
       <section className="container mx-auto px-4 py-16">
