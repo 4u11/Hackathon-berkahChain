@@ -1,6 +1,5 @@
 'use client'
 import React, { useState } from "react";
-import Image from "next/image";
 
 const AboutPage = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -45,106 +44,6 @@ const AboutPage = () => {
         </div>
       </nav>
 
-      {/* Auth Pop-Up */}
-      {isAuthOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="bg-gray-800/90 p-8 rounded-2xl border border-gray-700 w-full max-w-md">
-            <div className="flex gap-4 mb-6">
-              <button
-                onClick={() => setAuthMode('signin')}
-                className={`text-xl font-bold transition-all ${
-                  authMode === 'signin' 
-                    ? 'bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent'
-                    : 'text-gray-400 hover:text-gray-200'
-                }`}
-              >
-                Sign In
-              </button>
-              <button
-                onClick={() => setAuthMode('signup')}
-                className={`text-xl font-bold transition-all ${
-                  authMode === 'signup'
-                    ? 'bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent'
-                    : 'text-gray-400 hover:text-gray-200'
-                }`}
-              >
-                Sign Up
-              </button>
-            </div>
-
-            <form className="space-y-6">
-              {authMode === 'signup' && (
-                <div>
-                  <label htmlFor="username" className="block text-sm font-medium text-gray-300">
-                    Username
-                  </label>
-                  <input
-                    type="text"
-                    id="username"
-                    className="mt-1 w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-                    placeholder="Enter your username"
-                  />
-                </div>
-              )}
-              
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="mt-1 w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="Enter your email"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-300">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  className="mt-1 w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="Enter your password"
-                />
-              </div>
-
-              {authMode === 'signup' && (
-                <div>
-                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300">
-                    Confirm Password
-                  </label>
-                  <input
-                    type="password"
-                    id="confirmPassword"
-                    className="mt-1 w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-                    placeholder="Confirm your password"
-                  />
-                </div>
-              )}
-
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-2 rounded-full text-white hover:shadow-lg transition-all"
-              >
-                {authMode === 'signin' ? 'Sign In' : 'Create Account'}
-              </button>
-            </form>
-
-            <button
-              onClick={() => setIsAuthOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-200 transition-colors"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* About Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto text-center">
@@ -184,62 +83,26 @@ const AboutPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Team Member 1 */}
             <div className="bg-gray-800/50 p-6 rounded-2xl border border-gray-700 text-center">
-              <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
-                <Image
-                  src="/team-member-1.jpg"
-                  alt="Team Member 1"
-                  width={128}
-                  height={128}
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-gray-100">John Doe</h3>
-              <p className="text-gray-400">CEO & Founder</p>
+              <h3 className="text-xl font-bold text-gray-100">Naufal Nanda</h3>
+              <p className="text-gray-400">Project Lead</p>
             </div>
 
             {/* Team Member 2 */}
             <div className="bg-gray-800/50 p-6 rounded-2xl border border-gray-700 text-center">
-              <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
-                <Image
-                  src="/team-member-2.jpg"
-                  alt="Team Member 2"
-                  width={128}
-                  height={128}
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-gray-100">Jane Smith</h3>
-              <p className="text-gray-400">CTO</p>
+              <h3 className="text-xl font-bold text-gray-100">Azzam Rabbani</h3>
+              <p className="text-gray-400">UI Designer</p>
             </div>
 
             {/* Team Member 3 */}
             <div className="bg-gray-800/50 p-6 rounded-2xl border border-gray-700 text-center">
-              <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
-                <Image
-                  src="/team-member-3.jpg"
-                  alt="Team Member 3"
-                  width={128}
-                  height={128}
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-gray-100">Alice Johnson</h3>
-              <p className="text-gray-400">Lead Developer</p>
+              <h3 className="text-xl font-bold text-gray-100">Miftahul Maulana</h3>
+              <p className="text-gray-400">Backend Engineer</p>
             </div>
 
             {/* Team Member 4 */}
             <div className="bg-gray-800/50 p-6 rounded-2xl border border-gray-700 text-center">
-              <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
-                <Image
-                  src="/team-member-4.jpg"
-                  alt="Team Member 4"
-                  width={128}
-                  height={128}
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-gray-100">Bob Williams</h3>
-              <p className="text-gray-400">Marketing Lead</p>
+              <h3 className="text-xl font-bold text-gray-100">Radithya Kinan</h3>
+              <p className="text-gray-400">Database Handler</p>
             </div>
           </div>
         </div>
