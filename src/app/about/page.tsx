@@ -186,7 +186,7 @@ We hope that by using the ICP and Web3 ecosystems, we can motivate digital curre
             {/* Team Member 3 */}
             <div className="bg-gray-800/50 p-6 rounded-2xl border border-gray-700 text-center">
               <h3 className="text-xl font-bold text-gray-100">Miftahul Maulana</h3>
-              <p className="text-gray-400">Backend Engineer</p>
+              <p className="text-gray-400">Fullstack Developer</p>
             </div>
 
             {/* Team Member 4 */}
