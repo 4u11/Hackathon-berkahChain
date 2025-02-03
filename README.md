@@ -5,6 +5,7 @@
     mengumpulkan dana, dan memantau perkembangan proyek mereka. Kami
     akan menggunakan teknologi blockchain untuk memastikan keamanan dan transparansi dalam pengumpulan
     dana.
+    Website ini sudah di deploy di https://berkahchain.vercel.app/market#
 
 ### Langkah 1: Membuat Struktur Basis Data
     Pertama, kami akan membuat struktur basis data untuk menyimpan informasi tentang proyek
