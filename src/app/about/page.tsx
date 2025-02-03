@@ -137,7 +137,11 @@ const AboutPage = () => {
             About BerkahChain
           </h1>
           <p className="text-xl text-gray-300 mb-8">
-            BerkahChain is a revolutionary blockchain-based platform designed to empower communities through transparent and decentralized crowdfunding. Our mission is to connect donors directly with those in need, ensuring every contribution makes a real impact.
+          Berkahchain is a fundraising application program that functions using the ICP and Web3 ecosystems. By using both of these things, we can create a program to raise funds using cryptocurrencies. The purpose of this program is flexibility in making donations by paying using advanced digital currencies or more precisely cryptocurrencies.
+
+This program focuses on all types of fundraising such as natural disasters, project fundraising, medical needs, and other such things.
+
+We hope that by using the ICP and Web3 ecosystems, we can motivate digital currency or cryptocurrency owners to donate or give alms using the Berkahchain program.
           </p>
         </div>
 
