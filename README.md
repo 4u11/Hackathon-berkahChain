@@ -6,6 +6,7 @@
     akan menggunakan teknologi blockchain untuk memastikan keamanan dan transparansi dalam pengumpulan
     dana.
     Website ini sudah live di https://berkahchain.vercel.app
+    Langkah - langkah yang dibawah ialah langkah dalam membuat database-nya
 
 ### Langkah 1: Membuat Struktur Basis Data
     Pertama, kami akan membuat struktur basis data untuk menyimpan informasi tentang proyek
