@@ -251,6 +251,8 @@ const Home = () => {
               <p className="text-gray-300">
                 Whether its medical emergencies, disaster relief, or community projects, we ensure every contribution makes a real impact. Our platform uses smart contracts to guarantee transparency and accountability in every transaction.
               </p>
+              <a href="/about" className="text-blue-300 hover:text-white transition-colors">Learn more</a>
+              {/* "text-xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent" */}
             </div>
           )}
         </div>

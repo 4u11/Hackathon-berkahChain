@@ -136,7 +136,7 @@ const AboutPage = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
             About BerkahChain
           </h1>
-          <p className="text-xl text-gray-300 mb-8">
+          <p className="text-xl text-gray-300 mb-8 text-justify">
           Berkahchain is a fundraising application program that functions using the ICP and Web3 ecosystems. By using both of these things, we can create a program to raise funds using cryptocurrencies. The purpose of this program is flexibility in making donations by paying using advanced digital currencies or more precisely cryptocurrencies.
 
 This program focuses on all types of fundraising such as natural disasters, project fundraising, medical needs, and other such things.
@@ -148,18 +148,18 @@ We hope that by using the ICP and Web3 ecosystems, we can motivate digital curre
         {/* Mission Section */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-gray-800/50 p-8 rounded-2xl border border-gray-700">
-            <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+            <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent text-justify">
               Our Mission
             </h2>
-            <p className="text-gray-400">
+            <p className="text-gray-400 text-justify">
               We aim to create a world where financial assistance is transparent, efficient, and accessible to everyone. By leveraging blockchain technology, we ensure that every donation is traceable and used for its intended purpose.
             </p>
           </div>
           <div className="bg-gray-800/50 p-8 rounded-2xl border border-gray-700">
-            <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+            <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent text-justify">
               Our Vision
             </h2>
-            <p className="text-gray-400">
+            <p className="text-gray-400 text-justify">
               To become the leading platform for decentralized crowdfunding, empowering individuals and communities to create positive change through transparent and accountable financial support.
             </p>
           </div>
