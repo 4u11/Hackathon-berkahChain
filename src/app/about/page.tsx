@@ -1,42 +1,10 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
-interface DonationCause {
-  id: number;
-  title: string;
-  raisedBTC: number;
-  goalBTC: number;
-  category: string;
-}
-
-const DonationPage = () => {
-  const [btcPrice, setBtcPrice] = useState<number>(0);
-  const [loading, setLoading] = useState(true);
+const AboutPage = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
-
-  const donationCauses: DonationCause[] = [
-    { id: 1, title: "Children's Medical Fund", raisedBTC: 0.8, goalBTC: 2.5, category: "Healthcare" },
-    { id: 2, title: "Disaster Relief Fund", raisedBTC: 1.2, goalBTC: 5, category: "Emergency" },
-    { id: 3, title: "Education Blockchain Project", raisedBTC: 0.5, goalBTC: 3, category: "Education" },
-    { id: 4, title: "Wildlife Conservation", raisedBTC: 0.3, goalBTC: 1.5, category: "Environment" },
-    { id: 5, title: "Open Source Development", raisedBTC: 1.7, goalBTC: 4, category: "Technology" },
-    { id: 6, title: "Community Food Bank", raisedBTC: 0.9, goalBTC: 2, category: "Social" },
-  ];
-
-  useEffect(() => {
-    fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
-      .then(res => res.json())
-      .then(data => {
-        setBtcPrice(data.bitcoin.usd);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
-
-  const calculateProgress = (raised: number, goal: number) => (raised / goal) * 100;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
@@ -177,87 +145,107 @@ const DonationPage = () => {
         </div>
       )}
 
-      {/* Donation Grid */}
+      {/* About Section */}
       <section className="container mx-auto px-4 py-16">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-            Bitcoin Donation Causes
-          </h2>
-          {!loading && (
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+            About BerkahChain
+          </h1>
+          <p className="text-xl text-gray-300 mb-8">
+            BerkahChain is a revolutionary blockchain-based platform designed to empower communities through transparent and decentralized crowdfunding. Our mission is to connect donors directly with those in need, ensuring every contribution makes a real impact.
+          </p>
+        </div>
+
+        {/* Mission Section */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-gray-800/50 p-8 rounded-2xl border border-gray-700">
+            <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+              Our Mission
+            </h2>
             <p className="text-gray-400">
-              1 BTC = ${btcPrice?.toLocaleString() || 'N/A'}
+              We aim to create a world where financial assistance is transparent, efficient, and accessible to everyone. By leveraging blockchain technology, we ensure that every donation is traceable and used for its intended purpose.
             </p>
-          )}
+          </div>
+          <div className="bg-gray-800/50 p-8 rounded-2xl border border-gray-700">
+            <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+              Our Vision
+            </h2>
+            <p className="text-gray-400">
+              To become the leading platform for decentralized crowdfunding, empowering individuals and communities to create positive change through transparent and accountable financial support.
+            </p>
+          </div>
         </div>
 
-        {/* New Donation Button */}
-        <div className="flex justify-end mb-8">
-          <Link 
-            href="/donations/new"
-            className="bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-3 rounded-full text-white hover:shadow-lg transition-all"
-          >
-            + New Donation
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {donationCauses.map((cause) => {
-            const raisedUSD = cause.raisedBTC * btcPrice;
-            const goalUSD = cause.goalBTC * btcPrice;
-
-            return (
-              <div 
-                key={cause.id}
-                className="group bg-gray-800/50 p-6 rounded-2xl border border-gray-700 hover:border-green-500 transition-all hover:shadow-xl"
-              >
-                <div className="relative h-60 rounded-xl overflow-hidden">
-                  <Image
-                    src="/donation-btc.jpg"
-                    alt="Donation cause"
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent" />
-                  <span className="absolute top-4 right-4 bg-green-500/90 text-white px-3 py-1 rounded-full text-sm">
-                    {cause.category}
-                  </span>
-                </div>
-                
-                <div className="mt-6">
-                  <h3 className="text-xl font-semibold text-gray-100 mb-2">{cause.title}</h3>
-                  <div className="flex justify-between items-center mb-4">
-                    <div className="text-gray-400">
-                      <span className="text-green-500">⏣ {cause.raisedBTC}</span>
-                      <span className="block text-xs mt-1">
-                        ${raisedUSD.toLocaleString(undefined, { maximumFractionDigits: 0 })}
-                      </span>
-                    </div>
-                    <div className="text-gray-400">
-                      <span className="text-blue-500">⏣ {cause.goalBTC}</span>
-                      <span className="block text-xs mt-1">
-                        ${goalUSD.toLocaleString(undefined, { maximumFractionDigits: 0 })}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="relative pt-1">
-                    <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-700">
-                      <div 
-                        style={{ width: `${calculateProgress(cause.raisedBTC, cause.goalBTC)}%` }}
-                        className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r from-green-500 to-blue-500"
-                      ></div>
-                    </div>
-                  </div>
-                  <button className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-6 py-3 rounded-full font-medium transition-all transform hover:scale-[1.02]">
-                    Donate Bitcoin
-                  </button>
-                </div>
+        {/* Team Section */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+            Meet the Team
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Team Member 1 */}
+            <div className="bg-gray-800/50 p-6 rounded-2xl border border-gray-700 text-center">
+              <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                <Image
+                  src="/team-member-1.jpg"
+                  alt="Team Member 1"
+                  width={128}
+                  height={128}
+                  className="object-cover"
+                />
               </div>
-            );
-          })}
+              <h3 className="text-xl font-bold text-gray-100">John Doe</h3>
+              <p className="text-gray-400">CEO & Founder</p>
+            </div>
+
+            {/* Team Member 2 */}
+            <div className="bg-gray-800/50 p-6 rounded-2xl border border-gray-700 text-center">
+              <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                <Image
+                  src="/team-member-2.jpg"
+                  alt="Team Member 2"
+                  width={128}
+                  height={128}
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-bold text-gray-100">Jane Smith</h3>
+              <p className="text-gray-400">CTO</p>
+            </div>
+
+            {/* Team Member 3 */}
+            <div className="bg-gray-800/50 p-6 rounded-2xl border border-gray-700 text-center">
+              <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                <Image
+                  src="/team-member-3.jpg"
+                  alt="Team Member 3"
+                  width={128}
+                  height={128}
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-bold text-gray-100">Alice Johnson</h3>
+              <p className="text-gray-400">Lead Developer</p>
+            </div>
+
+            {/* Team Member 4 */}
+            <div className="bg-gray-800/50 p-6 rounded-2xl border border-gray-700 text-center">
+              <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                <Image
+                  src="/team-member-4.jpg"
+                  alt="Team Member 4"
+                  width={128}
+                  height={128}
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-bold text-gray-100">Bob Williams</h3>
+              <p className="text-gray-400">Marketing Lead</p>
+            </div>
+          </div>
         </div>
       </section>
     </div>
   );
 };
 
-export default DonationPage;
+export default AboutPage;

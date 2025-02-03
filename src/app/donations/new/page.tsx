@@ -8,12 +8,29 @@ const NewDonationPage = () => {
     description: "",
     goalBTC: "",
     category: "",
+    image: null as File | null,
   });
+
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission (e.g., send data to backend)
     console.log("New Donation Created:", formData);
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setFormData({ ...formData, image: file });
+
+      // Create a preview URL for the image
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -45,6 +62,52 @@ const NewDonationPage = () => {
             Create New Donation
           </h2>
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Image Upload */}
+            <div>
+              <label htmlFor="image" className="block text-sm font-medium text-gray-300">
+                Donation Image
+              </label>
+              <div className="mt-1 flex items-center gap-4">
+                <label
+                  htmlFor="image"
+                  className="flex flex-col items-center justify-center w-32 h-32 bg-gray-700 border-2 border-dashed border-gray-600 rounded-lg cursor-pointer hover:border-green-500 transition-all"
+                >
+                  {previewImage ? (
+                    <img
+                      src={previewImage}
+                      alt="Preview"
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  ) : (
+                    <div className="text-gray-400 text-center">
+                      <svg
+                        className="w-8 h-8 mx-auto"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                      <span className="text-xs">Upload Image</span>
+                    </div>
+                  )}
+                </label>
+                <input
+                  type="file"
+                  id="image"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="hidden"
+                />
+              </div>
+            </div>
+
+            {/* Title */}
             <div>
               <label htmlFor="title" className="block text-sm font-medium text-gray-300">
                 Title
@@ -59,6 +122,8 @@ const NewDonationPage = () => {
                 required
               />
             </div>
+
+            {/* Description */}
             <div>
               <label htmlFor="description" className="block text-sm font-medium text-gray-300">
                 Description
@@ -73,6 +138,8 @@ const NewDonationPage = () => {
                 required
               />
             </div>
+
+            {/* Goal (BTC) */}
             <div>
               <label htmlFor="goalBTC" className="block text-sm font-medium text-gray-300">
                 Goal (BTC)
@@ -87,6 +154,8 @@ const NewDonationPage = () => {
                 required
               />
             </div>
+
+            {/* Category */}
             <div>
               <label htmlFor="category" className="block text-sm font-medium text-gray-300">
                 Category
@@ -107,6 +176,8 @@ const NewDonationPage = () => {
                 <option value="Social">Social</option>
               </select>
             </div>
+
+            {/* Buttons */}
             <div className="flex justify-end gap-4">
               <Link 
                 href="/donations"

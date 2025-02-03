@@ -8,7 +8,6 @@ const Home = () => {
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
   const [isAboutVisible, setIsAboutVisible] = useState(false);
 
-  // Custom smooth scroll function with easing
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -41,7 +40,6 @@ const Home = () => {
     }
   };
 
-  // Add intersection observer for fade-in effect
   useEffect(() => {
     const aboutSection = document.getElementById('about-us');
     const observer = new IntersectionObserver(
@@ -82,7 +80,7 @@ const Home = () => {
                 href="#about-us" 
                 className="text-gray-300 hover:text-white transition-colors"
                 onClick={(e) => {
-                  e.preventDefault(); // Prevent default anchor behavior
+                  e.preventDefault();
                   scrollToSection('about-us');
                 }}
               >
@@ -91,15 +89,26 @@ const Home = () => {
               <a href="/market" className="text-gray-300 hover:text-white transition-colors">Market</a>
             </div>
           </div>
-          <button 
-            onClick={() => {
-              setIsAuthOpen(true);
-              setAuthMode('signin');
-            }}
-            className="bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-2 rounded-full text-white hover:shadow-lg transition-all"
-          >
-            Sign In
-          </button>
+          <div className="flex space-x-4">
+            <button 
+              onClick={() => {
+                setIsAuthOpen(true);
+                setAuthMode('signin');
+              }}
+              className="bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-2 rounded-full text-white hover:shadow-lg transition-all"
+            >
+              Sign In
+            </button>
+            <button 
+              onClick={() => {
+                setIsAuthOpen(true);
+                setAuthMode('signup');
+              }}
+              className="bg-gradient-to-r from-blue-500 to-cyan-600 px-6 py-2 rounded-full text-white hover:shadow-lg transition-all"
+            >
+              Sign Up
+            </button>
+          </div>
         </div>
       </nav>
 
